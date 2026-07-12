@@ -4,6 +4,14 @@ const bookingDialog = document.querySelector("[data-booking-dialog]");
 const bookingOpenButtons = document.querySelectorAll("[data-booking-open]");
 const bookingCloseButton = document.querySelector("[data-booking-close]");
 const pageImages = document.querySelectorAll("img");
+const photoLightboxImages = document.querySelectorAll(
+  [
+    ".work-item img",
+    ".zivo-promise__media img",
+    ".zivo-team-grid img",
+    ".zivo-guide__tiles img",
+  ].join(", ")
+);
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const EMAIL_IN_TEXT_RE = /[^\s@]+@[^\s@]+\.[^\s@]+/;
@@ -233,6 +241,107 @@ pageImages.forEach((image, index) => {
     useFallbackPhoto();
   }
 });
+
+const initPhotoLightbox = () => {
+  if (!photoLightboxImages.length) return;
+
+  const dialog = document.createElement("dialog");
+  dialog.className = "photo-lightbox";
+  dialog.setAttribute("aria-label", "Foto ampliada");
+
+  const closeButton = document.createElement("button");
+  closeButton.className = "photo-lightbox__close";
+  closeButton.type = "button";
+  closeButton.setAttribute("aria-label", "Cerrar foto ampliada");
+  closeButton.innerHTML = '<span aria-hidden="true"></span>';
+
+  const figure = document.createElement("figure");
+  figure.className = "photo-lightbox__figure";
+
+  const image = document.createElement("img");
+  image.className = "photo-lightbox__image";
+  image.alt = "";
+
+  figure.append(image);
+  dialog.append(closeButton, figure);
+  document.body.append(dialog);
+
+  let lastTrigger = null;
+
+  const closeLightbox = () => {
+    if (typeof dialog.close === "function" && dialog.open) {
+      dialog.close();
+      return;
+    }
+
+    dialog.removeAttribute("open");
+    document.body.classList.remove("dialog-is-open");
+    image.removeAttribute("src");
+    lastTrigger?.focus?.({ preventScroll: true });
+  };
+
+  const openLightbox = (sourceImage) => {
+    const source = sourceImage.currentSrc || sourceImage.getAttribute("src");
+
+    if (!source) return;
+
+    lastTrigger = sourceImage;
+    image.src = source;
+    image.alt = sourceImage.alt || "Foto ampliada";
+
+    if (typeof dialog.showModal === "function") {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute("open", "");
+    }
+
+    document.body.classList.add("dialog-is-open");
+    window.setTimeout(() => closeButton.focus({ preventScroll: true }), 80);
+  };
+
+  photoLightboxImages.forEach((sourceImage) => {
+    sourceImage.classList.add("photo-lightbox-trigger");
+
+    if (!sourceImage.closest("[aria-hidden='true']")) {
+      sourceImage.tabIndex = 0;
+      sourceImage.setAttribute("role", "button");
+      sourceImage.setAttribute(
+        "aria-label",
+        sourceImage.alt ? `Ver en grande: ${sourceImage.alt}` : "Ver foto en grande"
+      );
+    }
+
+    sourceImage.addEventListener("click", () => openLightbox(sourceImage));
+    sourceImage.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+
+      event.preventDefault();
+      openLightbox(sourceImage);
+    });
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      closeLightbox();
+    }
+  });
+
+  dialog.addEventListener("close", () => {
+    document.body.classList.remove("dialog-is-open");
+    image.removeAttribute("src");
+    lastTrigger?.focus?.({ preventScroll: true });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && dialog.open) {
+      closeLightbox();
+    }
+  });
+};
+
+initPhotoLightbox();
 
 const collectTrackingFields = () => {
   const params = new URLSearchParams(window.location.search);

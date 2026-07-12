@@ -249,6 +249,10 @@ button {
   overflow: hidden;
 }
 
+.photo-lightbox-trigger {
+  cursor: zoom-in;
+}
+
 .work-cta {
   display: flex;
   justify-content: center;
@@ -341,6 +345,80 @@ button {
 .booking-dialog .zivo-form {
   max-height: calc(100svh - 84px);
   overflow: auto;
+}
+
+.photo-lightbox {
+  width: min(1180px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100svh - 32px);
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+}
+
+.photo-lightbox::backdrop {
+  background: rgba(12, 11, 10, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.photo-lightbox__figure {
+  display: grid;
+  max-height: calc(100svh - 32px);
+  place-items: center;
+  margin: 0;
+}
+
+dialog.photo-lightbox .photo-lightbox__image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 32px);
+  border-radius: 4px;
+  background: #111111;
+  box-shadow: 0 28px 80px -34px rgba(0, 0, 0, 0.9);
+  cursor: default;
+  object-fit: contain;
+}
+
+.photo-lightbox__close {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 2;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  background: rgba(251, 250, 247, 0.94);
+  box-shadow: 0 16px 42px -24px rgba(0, 0, 0, 0.88);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.photo-lightbox__close span,
+.photo-lightbox__close span::after {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.photo-lightbox__close span {
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.photo-lightbox__close span::after {
+  position: absolute;
+  inset: 0;
+  transform: rotate(90deg);
 }
 
 :focus-visible {
