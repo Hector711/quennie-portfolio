@@ -3,8 +3,10 @@ const stepForms = document.querySelectorAll("[data-step-form]");
 const bookingDialog = document.querySelector("[data-booking-dialog]");
 const bookingOpenButtons = document.querySelectorAll("[data-booking-open]");
 const bookingCloseButton = document.querySelector("[data-booking-close]");
+const pageImages = document.querySelectorAll("img");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_IN_TEXT_RE = /[^\s@]+@[^\s@]+\.[^\s@]+/;
 const TRACKING_FIELDS = [
   "utm_source",
   "utm_medium",
@@ -17,74 +19,62 @@ const TRACKING_FIELDS = [
 
 const WEDDING_FORM_STEPS = [
   {
-    type: "text",
-    key: "name",
-    question: "¿Cuál es tu nombre y apellidos?",
-    summaryLabel: "Nombre",
-    placeholder: "Nombre y apellidos",
-    autoComplete: "name",
-    inputMode: "text",
-    validate: (value) => (value.trim().length >= 2 ? "" : "Escribe tu nombre para continuar."),
-  },
-  {
-    type: "text",
-    key: "email",
-    question: "¿A qué correo te escribo?",
-    summaryLabel: "Correo electrónico",
-    placeholder: "tu@correo.com",
-    autoComplete: "email",
-    inputMode: "email",
-    validate: (value) => (EMAIL_RE.test(value.trim()) ? "" : "Introduce un correo válido."),
-  },
-  {
-    type: "text",
-    key: "phone",
-    question: "¿Cuál es tu teléfono o WhatsApp?",
-    summaryLabel: "Teléfono",
-    placeholder: "+34 600 000 000",
-    autoComplete: "tel",
-    inputMode: "tel",
-    validate: (value) =>
-      value.replace(/\D/g, "").length >= 6 ? "" : "Introduce un teléfono válido.",
+    type: "choice",
+    key: "project_type",
+    question: "¿Qué estás preparando?",
+    summaryLabel: "Tipo de proyecto",
+    options: [
+      { value: "Boda" },
+      { value: "Elopement" },
+      { value: "Preboda o postboda" },
+      { value: "Editorial" },
+      { value: "Aún estoy explorando" },
+    ],
   },
   {
     type: "choice",
     key: "wedding_timing",
-    question: "¿Cuándo es vuestra boda?",
+    question: "¿Cuándo sería?",
     summaryLabel: "Fecha aproximada",
     options: [
       { value: "2026" },
-      { value: "2027" },
-      { value: "2028" },
-      { value: "Aún no tenemos fecha cerrada" },
+      { value: "Primavera 2027" },
+      { value: "Verano 2027" },
+      { value: "Otoño 2027" },
+      { value: "2028 o más adelante" },
+      { value: "Aún sin fecha" },
     ],
   },
   {
-    type: "text",
-    key: "date",
-    question: "¿Qué fecha o temporada tenéis en mente?",
-    summaryLabel: "Fecha de la boda",
-    placeholder: "Ej. septiembre 2027",
-    autoComplete: "off",
-    inputMode: "text",
-    validate: (value) =>
-      value.trim().length >= 2 ? "" : "Indica una fecha o temporada aproximada.",
+    type: "choice",
+    key: "date_status",
+    question: "¿Cómo de cerrada está la fecha?",
+    summaryLabel: "Estado de la fecha",
+    options: [
+      { value: "Fecha cerrada" },
+      { value: "Tenemos temporada" },
+      { value: "Estamos entre varias fechas" },
+      { value: "Aún por decidir" },
+    ],
   },
   {
-    type: "text",
+    type: "choice",
     key: "location",
-    question: "¿Dónde será la celebración?",
-    summaryLabel: "Lugar de la boda",
-    placeholder: "Ciudad, finca o país",
-    autoComplete: "off",
-    inputMode: "text",
-    validate: (value) =>
-      value.trim().length >= 2 ? "" : "Cuéntame dónde será la celebración.",
+    question: "¿Dónde os imagináis la celebración?",
+    summaryLabel: "Ubicación",
+    options: [
+      { value: "Madrid o alrededores" },
+      { value: "España peninsular" },
+      { value: "Baleares o Canarias" },
+      { value: "Europa" },
+      { value: "Destino internacional" },
+      { value: "Aún por decidir" },
+    ],
   },
   {
     type: "choice",
     key: "celebration",
-    question: "¿Qué tipo de celebración estáis preparando?",
+    question: "¿Qué tipo de celebración será?",
     summaryLabel: "Tipo de celebración",
     options: [
       { value: "Boda completa" },
@@ -96,6 +86,19 @@ const WEDDING_FORM_STEPS = [
   },
   {
     type: "choice",
+    key: "guest_count",
+    question: "¿Cuántas personas calculáis?",
+    summaryLabel: "Invitados",
+    options: [
+      { value: "Menos de 30" },
+      { value: "30-70" },
+      { value: "70-120" },
+      { value: "Más de 120" },
+      { value: "Aún no lo sabemos" },
+    ],
+  },
+  {
+    type: "choice",
     key: "coverage",
     question: "¿Qué cobertura os interesa?",
     summaryLabel: "Cobertura",
@@ -103,22 +106,115 @@ const WEDDING_FORM_STEPS = [
       { value: "Día completo" },
       { value: "Ceremonia + celebración" },
       { value: "Fin de semana completo" },
+      { value: "Solo unas horas" },
       { value: "Aún no lo sabemos" },
     ],
   },
   {
-    type: "textarea",
-    key: "message",
-    question: "¿Qué os gustaría sentir al ver la galería?",
-    summaryLabel: "Historia que quieren recordar",
-    placeholder: "Cuéntame qué tipo de historia queréis recordar.",
-    validate: (value) =>
-      value.trim().length >= 10 ? "" : "Cuéntame un poco más para preparar la consulta.",
+    type: "choice",
+    key: "gallery_mood",
+    question: "¿Qué queréis sentir al ver la galería?",
+    summaryLabel: "Sensación buscada",
+    options: [
+      { value: "Emoción y naturalidad" },
+      { value: "Elegancia editorial" },
+      { value: "Fiesta y movimiento" },
+      { value: "Intimidad y calma" },
+      { value: "Un poco de todo" },
+    ],
+  },
+  {
+    type: "choice",
+    key: "contact_preference",
+    question: "¿Cómo prefieres que te escriba?",
+    summaryLabel: "Canal preferido",
+    options: [
+      { value: "Email" },
+      { value: "WhatsApp" },
+      { value: "Llamada" },
+      { value: "Me da igual" },
+    ],
+  },
+  {
+    type: "text",
+    key: "contact_details",
+    question: "Último paso: déjame tu nombre y email o WhatsApp.",
+    summaryLabel: "Contacto",
+    placeholder: "Nombre + email o WhatsApp",
+    autoComplete: "email",
+    inputMode: "text",
+    validate: (value) => {
+      const trimmed = value.trim();
+      const hasContact = EMAIL_IN_TEXT_RE.test(trimmed) || trimmed.replace(/\D/g, "").length >= 6;
+      return trimmed.length >= 6 && hasContact
+        ? ""
+        : "Añade tu nombre y un email o WhatsApp para poder responder.";
+    },
   },
 ];
 
 const arrowIcon =
   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+
+const FALLBACK_PHOTOS = [
+  "assets/photos/wedding-couple.jpg",
+  "assets/photos/ceremony-flowers.jpg",
+  "assets/photos/outdoor-wedding.jpg",
+  "assets/photos/wedding-detail.jpg",
+  "assets/photos/team-photographer.jpg",
+  "assets/photos/couple-walk.jpg",
+];
+const FINAL_FALLBACK_PHOTO = `data:image/svg+xml,${encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+    <defs>
+      <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+        <stop stop-color="#f7eee4" />
+        <stop offset=".5" stop-color="#b6bfd4" />
+        <stop offset="1" stop-color="#636d84" />
+      </linearGradient>
+      <linearGradient id="light" x1="0" x2="1">
+        <stop stop-color="#ffffff" stop-opacity=".72" />
+        <stop offset="1" stop-color="#ffffff" stop-opacity=".08" />
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#sky)" />
+    <circle cx="930" cy="165" r="150" fill="#fff6df" opacity=".56" />
+    <path d="M0 595c180-102 322-134 490-74 128 46 248 54 392-26 128-71 224-80 318-36v341H0z" fill="#2b3040" opacity=".38" />
+    <path d="M162 218c94 76 204 89 335 39 92-35 163-33 214 8-116 20-215 63-298 128-98-75-181-100-251-175z" fill="url(#light)" opacity=".58" />
+    <rect width="1200" height="800" fill="#141824" opacity=".08" />
+  </svg>
+`)}`;
+
+pageImages.forEach((image, index) => {
+  const fallbackPhoto = image.dataset.fallbackSrc || FALLBACK_PHOTOS[index % FALLBACK_PHOTOS.length];
+  const fallbackQueue = [
+    fallbackPhoto,
+    ...FALLBACK_PHOTOS.filter((photo) => photo !== fallbackPhoto),
+    FINAL_FALLBACK_PHOTO,
+  ];
+  let fallbackIndex = 0;
+
+  const useFallbackPhoto = () => {
+    const currentSource = image.currentSrc || image.getAttribute("src") || "";
+    const nextFallback = fallbackQueue.find((photo, queueIndex) => {
+      if (queueIndex < fallbackIndex) return false;
+      return photo.startsWith("data:") || !currentSource.endsWith(photo);
+    });
+
+    if (!nextFallback) return;
+
+    fallbackIndex = fallbackQueue.indexOf(nextFallback) + 1;
+    image.dataset.fallbackApplied = "true";
+    image.classList.add("image-fallback");
+    image.src = nextFallback;
+  };
+
+  image.addEventListener("error", useFallbackPhoto);
+
+  if (image.complete && image.naturalWidth === 0) {
+    useFallbackPhoto();
+  }
+});
 
 const collectTrackingFields = () => {
   const params = new URLSearchParams(window.location.search);
@@ -127,6 +223,70 @@ const collectTrackingFields = () => {
     .map((key) => [key, params.get(key)])
     .filter(([, value]) => value)
     .map(([key, value]) => `${key}: ${value}`);
+};
+
+const collectTrackingData = () => {
+  const params = new URLSearchParams(window.location.search);
+
+  return TRACKING_FIELDS.reduce((tracking, key) => {
+    const value = params.get(key);
+    if (value) {
+      tracking[key] = value;
+    }
+    return tracking;
+  }, {});
+};
+
+const getWebhookUrl = (form) => {
+  const formWebhookUrl = form.dataset.webhookUrl?.trim();
+
+  if (formWebhookUrl) return formWebhookUrl;
+  if (typeof window.QUENNIE_WEBHOOK_URL === "string") {
+    return window.QUENNIE_WEBHOOK_URL.trim();
+  }
+
+  return "";
+};
+
+const buildSubmissionPayload = (form, answers, steps = WEDDING_FORM_STEPS) => {
+  const submittedAt = new Date();
+
+  return {
+    source: "quennie-portfolio",
+    form: form.dataset.subjectPrefix || "Consulta Quennie",
+    page: window.location.href,
+    submittedAt: submittedAt.toISOString(),
+    submittedAtLocal: submittedAt.toLocaleString("es-ES"),
+    answers,
+    summary: steps.map((step) => ({
+      key: step.key,
+      label: step.summaryLabel || step.question,
+      value: answers[step.key] || "",
+    })),
+    tracking: collectTrackingData(),
+    userAgent: window.navigator.userAgent,
+  };
+};
+
+const postToWebhook = async (form, payload) => {
+  const webhookUrl = getWebhookUrl(form);
+
+  if (!webhookUrl) return false;
+
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Webhook error: ${response.status}`);
+  }
+
+  return true;
 };
 
 const closeBookingDialog = () => {
@@ -184,7 +344,7 @@ window.addEventListener("hashchange", () => {
 const buildMailto = (form, answers) => {
   const recipient = form.dataset.recipient || "hello@quennie.studio";
   const subjectPrefix = form.dataset.subjectPrefix || "Consulta Quennie";
-  const name = answers.name || "Nueva consulta";
+  const name = answers.name || answers.contact_details || "Nueva consulta";
   const lines = WEDDING_FORM_STEPS.map((step) => {
     const label = step.summaryLabel || step.question;
     return `${label}: ${answers[step.key] || ""}`;
@@ -233,10 +393,29 @@ const initStepForm = (form) => {
     }
   };
 
-  const finish = () => {
+  const finish = async () => {
     isSubmitting = true;
-    setStatus("Consulta preparada en tu cliente de email.");
-    window.location.href = buildMailto(form, answers);
+    error = "";
+    render();
+    setStatus("Enviando consulta...");
+
+    try {
+      const payload = buildSubmissionPayload(form, answers);
+      const sentToWebhook = await postToWebhook(form, payload);
+
+      if (sentToWebhook) {
+        setStatus("Consulta enviada. Te escribiremos pronto.");
+      } else {
+        setStatus("Consulta preparada en tu cliente de email.");
+        window.location.href = buildMailto(form, answers);
+      }
+    } catch (submissionError) {
+      console.error(submissionError);
+      isSubmitting = false;
+      error = "No se pudo enviar. Inténtalo de nuevo en unos segundos.";
+      setStatus(error, true);
+      render();
+    }
   };
 
   const render = () => {
@@ -390,7 +569,6 @@ const initStepForm = (form) => {
 
     if (index === WEDDING_FORM_STEPS.length - 1) {
       finish();
-      render();
       return;
     }
 
@@ -421,10 +599,11 @@ stepForms.forEach(initStepForm);
 contactForms.forEach((form) => {
   if (form.matches("[data-step-form]")) return;
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const data = new FormData(form);
+    const answers = Object.fromEntries(data.entries());
     const name = data.get("name") || "";
     const email = data.get("email") || "";
     const subjectPrefix = form.dataset.subjectPrefix || "Consulta Quennie";
@@ -436,6 +615,27 @@ contactForms.forEach((form) => {
         .replace(/-/g, " ")
         .replace(/\b\w/g, (letter) => letter.toUpperCase());
       lines.push(`${label}: ${value}`);
+    }
+
+    if (status) {
+      status.textContent = "Enviando consulta...";
+      status.classList.remove("is-error");
+    }
+
+    try {
+      const sentToWebhook = await postToWebhook(form, buildSubmissionPayload(form, answers, []));
+
+      if (sentToWebhook) {
+        if (status) status.textContent = "Consulta enviada. Te escribiremos pronto.";
+        return;
+      }
+    } catch (submissionError) {
+      console.error(submissionError);
+      if (status) {
+        status.textContent = "No se pudo enviar. Inténtalo de nuevo en unos segundos.";
+        status.classList.add("is-error");
+      }
+      return;
     }
 
     if (status) {

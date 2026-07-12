@@ -47,15 +47,19 @@ img {
   display: block;
   width: 100%;
   height: 100%;
+  background: linear-gradient(135deg, #d8d1c5, #eef0f4 48%, #8f98ac);
   object-fit: cover;
+}
+
+img.image-fallback {
+  filter: saturate(0.88) contrast(0.94);
 }
 
 button {
   font: inherit;
 }
 
-.nav-link-button,
-.social-links button {
+.nav-link-button {
   padding: 0;
   border: 0;
   background: transparent;
@@ -121,14 +125,6 @@ button {
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
-}
-
-.home-offer h1 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 118px;
-  font-weight: 400;
-  line-height: 0.9;
 }
 
 .home-offer__copy {
@@ -307,44 +303,62 @@ button {
   grid-row: 3650 / span 500;
 }
 
-.site-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: end;
-  width: min(1080px, calc(100% - 72px));
+.work-cta {
+  display: flex;
+  justify-content: center;
+  width: min(1152px, calc(100% - 72px));
   margin: 0 auto;
-  padding-bottom: 44px;
-  color: var(--ink);
-  font-size: 9px;
+  padding: 20px 0 120px;
 }
 
-.site-footer h2,
+.work-cta__button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 25px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 18px 34px -23px rgba(23, 20, 17, 0.9);
+  color: var(--paper);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.site-footer {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  width: min(760px, calc(100% - 72px));
+  margin: 0 auto;
+  padding: 34px 0 52px;
+  border-top: 1px solid rgba(23, 20, 17, 0.18);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
 .site-footer p {
   margin: 0;
-  font: inherit;
+}
+
+.site-footer__brand {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1;
 }
 
 .site-footer a {
-  display: inline-flex;
-  margin-top: 4px;
-}
-
-.site-footer > div:last-child {
-  text-align: right;
-}
-
-.social-links {
-  display: flex;
-  gap: 13px;
-  margin-top: 14px;
-}
-
-.social-links a {
-  margin-top: 0;
-}
-
-.social-links button {
-  font: inherit;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
 .booking-dialog {
@@ -411,23 +425,24 @@ button {
 
   .home-offer {
     min-height: auto;
-    padding: 118px 0 54px;
+    padding: 106px 0 20px;
   }
 
   .home-offer__inner {
     width: calc(100% - 40px);
   }
 
-  .home-offer h1 {
-    font-size: 70px;
-  }
-
   .home-offer__copy {
+    margin-top: 20px;
     font-size: 16px;
   }
 
+  .home-offer__cta {
+    margin-top: 22px;
+  }
+
   .home-video {
-    margin-top: 34px;
+    margin-top: 30px;
   }
 
   .home-video__panel {
@@ -458,7 +473,11 @@ button {
     column-gap: 24px;
     width: calc(100% - 40px);
     min-height: 2120px;
-    padding-top: 72px;
+    padding-top: 28px;
+  }
+
+  .home-main .work-grid {
+    padding-top: 28px;
   }
 
   .work-item--hero-left {
@@ -515,10 +534,19 @@ button {
     grid-row: 744 / span 150;
   }
 
+  .work-cta {
+    width: calc(100% - 40px);
+    padding: 0 0 72px;
+  }
+
   .site-footer {
     width: calc(100% - 40px);
-    padding-bottom: 28px;
-    font-size: 8px;
+    padding: 28px 0 34px;
+    font-size: 12px;
+  }
+
+  .site-footer__brand {
+    font-size: 24px;
   }
 
   .booking-dialog {
@@ -549,6 +577,7 @@ button {
   display: block;
   width: 100%;
   height: auto;
+  background: linear-gradient(135deg, #d8d1c5, #eef0f4 48%, #8f98ac);
   object-fit: cover;
 }
 
@@ -1051,6 +1080,16 @@ button {
   outline: none;
 }
 
+.zivo-form__choice:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
+.zivo-form__choice span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .zivo-form__choice.is-selected {
   border-color: var(--zivo-blue);
   background: rgba(99, 113, 159, 0.08);
@@ -1526,7 +1565,8 @@ button {
   border-radius: 14px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(30, 37, 55, 0.72)),
-    url("https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1200&q=86") center/cover;
+    url("assets/photos/outdoor-wedding.jpg") center/cover,
+    linear-gradient(135deg, #66718c, #d7c4b5);
   color: #ffffff;
 }
 
@@ -1617,46 +1657,39 @@ button {
 }
 
 .zivo-footer {
-  padding: 72px 0 24px;
+  padding: 56px 0 24px;
   background: #121722;
   color: #ffffff;
+  text-align: center;
 }
 
 .zivo-footer__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) auto;
-  gap: 40px;
-  align-items: center;
+  justify-items: center;
+  gap: 14px;
 }
 
 .zivo-footer strong {
   display: block;
-  margin-bottom: 16px;
   font-size: 18px;
   font-weight: 900;
 }
 
-.zivo-footer h2 {
-  max-width: 520px;
-  margin-bottom: 16px;
-  font-size: 58px;
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 0.94;
-}
-
 .zivo-footer p {
-  max-width: 600px;
+  max-width: 560px;
+  margin: 0;
   color: rgba(255, 255, 255, 0.68);
   font-size: 13px;
+  line-height: 1.6;
 }
 
 .zivo-footer__links {
   display: flex;
   width: min(1120px, calc(100% - 40px));
   flex-wrap: wrap;
+  justify-content: center;
   gap: 22px;
-  margin: 54px auto 0;
+  margin: 32px auto 0;
   color: rgba(255, 255, 255, 0.48);
   font-size: 11px;
 }
@@ -1680,9 +1713,6 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .zivo-footer__grid {
-    align-items: start;
-  }
 }
 
 @media (max-width: 640px) {
@@ -1725,8 +1755,7 @@ button {
     font-size: 34px;
   }
 
-  .zivo-map-card strong,
-  .zivo-footer h2 {
+  .zivo-map-card strong {
     font-size: 38px;
   }
 
@@ -1852,5 +1881,7 @@ button {
 
   .zivo-footer__links {
     display: grid;
+    justify-items: center;
+    gap: 10px;
   }
 }
