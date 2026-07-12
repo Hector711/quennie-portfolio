@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio fotográfico de Quennie: retratos delicados, sesiones editoriales y memorias íntimas con una dirección visual suave y premium."
+    />
+    <title>Quennie Portfolio | Fotografía delicada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#inicio" aria-label="Ir al inicio de Quennie">
+        <span class="brand__mark">Q</span>
+        <span class="brand__text">Quennie</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+        <a href="#trabajos">Trabajos</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#sobre-mi">Sobre mi</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <picture class="hero__media" aria-hidden="true">
+          <source
+            srcset="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=88"
+            media="(min-width: 900px)"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=86"
+            alt=""
+          />
+        </picture>
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <p class="eyebrow">Retratos, bodas y editoriales suaves</p>
+          <h1>Quennie</h1>
+          <p>
+            Fotografía luminosa para personas que quieren verse naturales,
+            cuidadas y profundamente ellas mismas.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#trabajos">Ver trabajos</a>
+            <a class="button button--ghost" href="#contacto">Reservar sesión</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="signature-strip" aria-label="Especialidades">
+        <div>
+          <strong>35mm mood</strong>
+          <span>Texturas suaves y dirección natural.</span>
+        </div>
+        <div>
+          <strong>Skin-first edit</strong>
+          <span>Color delicado sin perder detalle real.</span>
+        </div>
+        <div>
+          <strong>Calma en set</strong>
+          <span>Una experiencia tranquila de principio a fin.</span>
+        </div>
+      </section>
+
+      <section class="section section--intro" id="trabajos">
+        <div class="section__heading">
+          <p class="eyebrow">Portfolio seleccionado</p>
+          <h2>Historias con luz suave, gestos pequeños y dirección editorial.</h2>
+        </div>
+
+        <div class="filter-bar" aria-label="Filtrar trabajos">
+          <button class="filter-button is-active" type="button" data-filter="all">Todo</button>
+          <button class="filter-button" type="button" data-filter="retrato">Retrato</button>
+          <button class="filter-button" type="button" data-filter="boda">Boda</button>
+          <button class="filter-button" type="button" data-filter="editorial">Editorial</button>
+        </div>
+
+        <div class="gallery" data-gallery>
+          <article class="work-card work-card--tall" data-category="retrato">
+            <img
+              src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=86"
+              alt="Retrato femenino con luz suave y fondo claro"
+            />
+            <div class="work-card__body">
+              <span>Retrato</span>
+              <h3>Morning Blush</h3>
+            </div>
+          </article>
+
+          <article class="work-card" data-category="boda">
+            <img
+              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=86"
+              alt="Pareja de boda caminando al aire libre"
+            />
+            <div class="work-card__body">
+              <span>Boda</span>
+              <h3>Vows in Bloom</h3>
+            </div>
+          </article>
+
+          <article class="work-card" data-category="editorial">
+            <img
+              src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=86"
+              alt="Editorial de moda con vestido rosa"
+            />
+            <div class="work-card__body">
+              <span>Editorial</span>
+              <h3>Soft Atelier</h3>
+            </div>
+          </article>
+
+          <article class="work-card work-card--wide" data-category="retrato">
+            <img
+              src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1200&q=86"
+              alt="Retrato delicado con cabello largo y luz natural"
+            />
+            <div class="work-card__body">
+              <span>Retrato</span>
+              <h3>Natural Notes</h3>
+            </div>
+          </article>
+
+          <article class="work-card" data-category="editorial">
+            <img
+              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=86"
+              alt="Modelo posando en una editorial de moda minimalista"
+            />
+            <div class="work-card__body">
+              <span>Editorial</span>
+              <h3>Glass Garden</h3>
+            </div>
+          </article>
+
+          <article class="work-card" data-category="boda">
+            <img
+              src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=86"
+              alt="Ramo de novia con flores claras"
+            />
+            <div class="work-card__body">
+              <span>Boda</span>
+              <h3>Petal Hour</h3>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section experience" id="experiencia">
+        <div class="section__heading">
+          <p class="eyebrow">Experiencia</p>
+          <h2>Un proceso ligero para que la cámara se sienta cercana.</h2>
+        </div>
+
+        <div class="process">
+          <article>
+            <span>01</span>
+            <h3>Concepto visual</h3>
+            <p>Moodboard, paleta, referencias y una dirección clara antes de la sesión.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Sesion guiada</h3>
+            <p>Poses naturales, pausas cuidadas y una dinámica amable para verte auténtica.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Edicion premium</h3>
+            <p>Color limpio, piel respetada y entrega digital lista para publicar o imprimir.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="about" id="sobre-mi">
+        <div class="about__media">
+          <img
+            src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1100&q=86"
+            alt="Fotógrafa revisando su cámara durante una sesión"
+          />
+        </div>
+        <div class="about__content">
+          <p class="eyebrow">Sobre Quennie</p>
+          <h2>Una mirada cute, delicada y precisa.</h2>
+          <p>
+            Quennie crea imágenes para marcas personales, parejas y mujeres que
+            buscan un recuerdo elegante sin sentirse rígidas frente a la cámara.
+          </p>
+          <div class="quote">
+            "La foto bonita empieza cuando la persona se siente tranquila."
+          </div>
+        </div>
+      </section>
+
+      <section class="section packages" aria-label="Paquetes de fotografía">
+        <div class="section__heading">
+          <p class="eyebrow">Colecciones</p>
+          <h2>Formatos pensados para retrato, marca personal y celebraciones.</h2>
+        </div>
+
+        <div class="package-grid">
+          <article class="package-card">
+            <span>Mini</span>
+            <h3>Portrait Bloom</h3>
+            <p>45 minutos, una localización y 18 fotografías editadas.</p>
+            <strong>Desde 180 EUR</strong>
+          </article>
+          <article class="package-card package-card--featured">
+            <span>Signature</span>
+            <h3>Soft Story</h3>
+            <p>2 horas, dirección creativa, dos looks y 45 fotografías editadas.</p>
+            <strong>Desde 390 EUR</strong>
+          </article>
+          <article class="package-card">
+            <span>Event</span>
+            <h3>Delicate Day</h3>
+            <p>Cobertura documental para bodas íntimas, pedidas y celebraciones.</p>
+            <strong>A medida</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact" id="contacto">
+        <div class="contact__content">
+          <p class="eyebrow">Reservas</p>
+          <h2>Creemos una sesión con tu energía.</h2>
+          <p>
+            Comparte fecha, ciudad y el tipo de fotos que quieres. Quennie
+            responde con una propuesta visual y disponibilidad.
+          </p>
+          <a href="mailto:hello@quennie.studio">hello@quennie.studio</a>
+        </div>
+
+        <form class="contact-form" data-contact-form>
+          <label>
+            Nombre
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            Tipo de sesión
+            <select name="session" required>
+              <option value="">Selecciona una opción</option>
+              <option>Retrato</option>
+              <option>Boda</option>
+              <option>Editorial</option>
+              <option>Marca personal</option>
+            </select>
+          </label>
+          <label>
+            Mensaje
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button class="button button--primary" type="submit">Enviar consulta</button>
+          <p class="form-status" role="status" data-form-status></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Quennie Portfolio</span>
+      <span>Fotografía delicada y editorial</span>
+      <a href="#inicio">Volver arriba</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
