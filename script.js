@@ -6,7 +6,6 @@ const bookingCloseButton = document.querySelector("[data-booking-close]");
 const pageImages = document.querySelectorAll("img");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const EMAIL_IN_TEXT_RE = /[^\s@]+@[^\s@]+\.[^\s@]+/;
 const TRACKING_FIELDS = [
   "utm_source",
   "utm_medium",
@@ -124,9 +123,42 @@ const WEDDING_FORM_STEPS = [
     ],
   },
   {
+    type: "text",
+    key: "phone",
+    question: "¿Cuál es tu número de teléfono?",
+    summaryLabel: "Teléfono",
+    placeholder: "+34 600 000 000",
+    autoComplete: "tel",
+    inputMode: "tel",
+    inputType: "tel",
+    validate: (value) =>
+      value.replace(/\D/g, "").length >= 6 ? "" : "Introduce un número de teléfono válido.",
+  },
+  {
+    type: "text",
+    key: "name",
+    question: "¿Cuál es tu nombre?",
+    summaryLabel: "Nombre",
+    placeholder: "Nombre y apellidos",
+    autoComplete: "name",
+    inputMode: "text",
+    validate: (value) => (value.trim().length >= 2 ? "" : "Escribe tu nombre para continuar."),
+  },
+  {
+    type: "text",
+    key: "email",
+    question: "¿A qué correo electrónico te escribo?",
+    summaryLabel: "Correo electrónico",
+    placeholder: "tu@correo.com",
+    autoComplete: "email",
+    inputMode: "email",
+    inputType: "email",
+    validate: (value) => (EMAIL_RE.test(value.trim()) ? "" : "Introduce un correo válido."),
+  },
+  {
     type: "choice",
     key: "contact_preference",
-    question: "¿Cómo prefieres que te escriba?",
+    question: "¿Cómo prefieres que te contacte?",
     summaryLabel: "Canal preferido",
     options: [
       { value: "Email" },
@@ -137,24 +169,38 @@ const WEDDING_FORM_STEPS = [
   },
   {
     type: "text",
-    key: "contact_details",
-    question: "Último paso: déjame tu nombre y email o WhatsApp.",
-    summaryLabel: "Contacto",
-    placeholder: "Nombre + email o WhatsApp",
-    autoComplete: "email",
-    inputMode: "text",
-    validate: (value) => {
-      const trimmed = value.trim();
-      const hasContact = EMAIL_IN_TEXT_RE.test(trimmed) || trimmed.replace(/\D/g, "").length >= 6;
-      return trimmed.length >= 6 && hasContact
-        ? ""
-        : "Añade tu nombre y un email o WhatsApp para poder responder.";
-    },
+    key: "whatsapp",
+    question: "¿Cuál es tu WhatsApp?",
+    summaryLabel: "WhatsApp",
+    placeholder: "Puede ser el mismo número",
+    autoComplete: "tel",
+    inputMode: "tel",
+    inputType: "tel",
+    validate: (value) =>
+      value.replace(/\D/g, "").length >= 6 ? "" : "Introduce un WhatsApp válido.",
   },
 ];
 
 const arrowIcon =
   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+
+const isWritableStep = (step) => step?.type === "text" || step?.type === "textarea";
+
+const focusTextControl = (control) => {
+  if (!control || control.disabled) return;
+
+  const focus = () => {
+    control.focus({ preventScroll: true });
+
+    if (typeof control.setSelectionRange === "function") {
+      const cursorPosition = control.value.length;
+      control.setSelectionRange(cursorPosition, cursorPosition);
+    }
+  };
+
+  focus();
+  window.setTimeout(focus, 80);
+};
 
 const FALLBACK_PHOTOS = [
   "assets/photos/wedding-couple.jpg",
@@ -344,7 +390,7 @@ window.addEventListener("hashchange", () => {
 const buildMailto = (form, answers) => {
   const recipient = form.dataset.recipient || "hello@quennie.studio";
   const subjectPrefix = form.dataset.subjectPrefix || "Consulta Quennie";
-  const name = answers.name || answers.contact_details || "Nueva consulta";
+  const name = answers.name || answers.email || answers.phone || "Nueva consulta";
   const lines = WEDDING_FORM_STEPS.map((step) => {
     const label = step.summaryLabel || step.question;
     return `${label}: ${answers[step.key] || ""}`;
@@ -432,6 +478,7 @@ const initStepForm = (form) => {
     const stepElement = document.createElement("section");
     stepElement.className = "zivo-form__step";
     stepElement.dataset.dir = direction;
+    let controlToFocus = null;
 
     const brand = document.createElement("div");
     brand.className = "zivo-form__brand";
@@ -459,7 +506,7 @@ const initStepForm = (form) => {
       input.setAttribute("aria-invalid", String(Boolean(error)));
 
       if (step.type === "text") {
-        input.type = step.key === "email" ? "email" : "text";
+        input.type = step.inputType || (step.key === "email" ? "email" : "text");
         input.inputMode = step.inputMode || "text";
         input.addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
@@ -502,7 +549,7 @@ const initStepForm = (form) => {
       }
 
       stepElement.append(actions);
-      window.setTimeout(() => input.focus({ preventScroll: true }), 90);
+      controlToFocus = input;
     }
 
     if (step.type === "choice") {
@@ -530,7 +577,12 @@ const initStepForm = (form) => {
             choice.classList.remove("is-selected");
           });
           button.classList.add("is-selected");
-          window.setTimeout(() => advance(option.value), 180);
+
+          if (isWritableStep(WEDDING_FORM_STEPS[index + 1])) {
+            advance(option.value);
+          } else {
+            window.setTimeout(() => advance(option.value), 180);
+          }
         });
         choices.append(button);
       });
@@ -547,6 +599,10 @@ const initStepForm = (form) => {
     }
 
     screen.append(stepElement);
+
+    if (controlToFocus && !isSubmitting) {
+      focusTextControl(controlToFocus);
+    }
   };
 
   const advance = (overrideValue) => {
