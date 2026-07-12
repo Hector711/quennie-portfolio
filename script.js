@@ -6,6 +6,7 @@ const bookingCloseButton = document.querySelector("[data-booking-close]");
 const pageImages = document.querySelectorAll("img");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_IN_TEXT_RE = /[^\s@]+@[^\s@]+\.[^\s@]+/;
 const TRACKING_FIELDS = [
   "utm_source",
   "utm_medium",
@@ -123,42 +124,9 @@ const WEDDING_FORM_STEPS = [
     ],
   },
   {
-    type: "text",
-    key: "phone",
-    question: "¿Cuál es tu número de teléfono?",
-    summaryLabel: "Teléfono",
-    placeholder: "+34 600 000 000",
-    autoComplete: "tel",
-    inputMode: "tel",
-    inputType: "tel",
-    validate: (value) =>
-      value.replace(/\D/g, "").length >= 6 ? "" : "Introduce un número de teléfono válido.",
-  },
-  {
-    type: "text",
-    key: "name",
-    question: "¿Cuál es tu nombre?",
-    summaryLabel: "Nombre",
-    placeholder: "Nombre y apellidos",
-    autoComplete: "name",
-    inputMode: "text",
-    validate: (value) => (value.trim().length >= 2 ? "" : "Escribe tu nombre para continuar."),
-  },
-  {
-    type: "text",
-    key: "email",
-    question: "¿A qué correo electrónico te escribo?",
-    summaryLabel: "Correo electrónico",
-    placeholder: "tu@correo.com",
-    autoComplete: "email",
-    inputMode: "email",
-    inputType: "email",
-    validate: (value) => (EMAIL_RE.test(value.trim()) ? "" : "Introduce un correo válido."),
-  },
-  {
     type: "choice",
     key: "contact_preference",
-    question: "¿Cómo prefieres que te contacte?",
+    question: "¿Cómo prefieres que te escriba?",
     summaryLabel: "Canal preferido",
     options: [
       { value: "Email" },
@@ -169,15 +137,19 @@ const WEDDING_FORM_STEPS = [
   },
   {
     type: "text",
-    key: "whatsapp",
-    question: "¿Cuál es tu WhatsApp?",
-    summaryLabel: "WhatsApp",
-    placeholder: "Puede ser el mismo número",
-    autoComplete: "tel",
-    inputMode: "tel",
-    inputType: "tel",
-    validate: (value) =>
-      value.replace(/\D/g, "").length >= 6 ? "" : "Introduce un WhatsApp válido.",
+    key: "contact_details",
+    question: "Último paso: déjame tu nombre y email o WhatsApp.",
+    summaryLabel: "Contacto",
+    placeholder: "Nombre + contacto",
+    autoComplete: "email",
+    inputMode: "text",
+    validate: (value) => {
+      const trimmed = value.trim();
+      const hasContact = EMAIL_IN_TEXT_RE.test(trimmed) || trimmed.replace(/\D/g, "").length >= 6;
+      return trimmed.length >= 6 && hasContact
+        ? ""
+        : "Añade tu nombre y un email o WhatsApp para poder responder.";
+    },
   },
 ];
 
@@ -390,7 +362,7 @@ window.addEventListener("hashchange", () => {
 const buildMailto = (form, answers) => {
   const recipient = form.dataset.recipient || "hello@quennie.studio";
   const subjectPrefix = form.dataset.subjectPrefix || "Consulta Quennie";
-  const name = answers.name || answers.email || answers.phone || "Nueva consulta";
+  const name = answers.name || answers.contact_details || "Nueva consulta";
   const lines = WEDDING_FORM_STEPS.map((step) => {
     const label = step.summaryLabel || step.question;
     return `${label}: ${answers[step.key] || ""}`;
