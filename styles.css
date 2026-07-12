@@ -127,7 +127,7 @@ button {
   margin-top: 26px;
   padding: 0 25px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--ink);
   box-shadow: 0 18px 34px -23px rgba(23, 20, 17, 0.9);
   color: var(--paper);
@@ -146,7 +146,7 @@ button {
   overflow: hidden;
   padding: 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 0;
   background: #151515;
 }
 
@@ -170,7 +170,7 @@ button {
   place-items: center;
   padding: 24px;
   border: 2px solid rgba(255, 255, 255, 0.78);
-  border-radius: 8px;
+  border-radius: 0;
   background: rgba(159, 181, 214, 0.86);
   color: #ffffff;
   transform: translate(-50%, -50%);
@@ -190,7 +190,7 @@ button {
 .home-video__panel span::before {
   position: absolute;
   inset: 7px 22px 7px 0;
-  border-radius: 5px;
+  border-radius: 0;
   background: #ffffff;
   content: "";
 }
@@ -251,7 +251,7 @@ button {
   justify-content: center;
   padding: 0 25px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--ink);
   box-shadow: 0 18px 34px -23px rgba(23, 20, 17, 0.9);
   color: var(--paper);
@@ -316,7 +316,7 @@ button {
   min-height: 34px;
   padding: 0 14px;
   border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.92);
   color: var(--zivo-ink);
   cursor: pointer;
@@ -358,7 +358,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   height: auto;
   max-width: 100%;
   max-height: calc(100svh - 32px);
-  border-radius: 4px;
+  border-radius: 0;
   background: #111111;
   box-shadow: 0 28px 80px -34px rgba(0, 0, 0, 0.9);
   cursor: default;
@@ -376,7 +376,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   place-items: center;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(251, 250, 247, 0.94);
   box-shadow: 0 16px 42px -24px rgba(0, 0, 0, 0.88);
   color: var(--ink);
@@ -388,7 +388,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   display: block;
   width: 16px;
   height: 2px;
-  border-radius: 999px;
+  border-radius: 0;
   background: currentColor;
   content: "";
 }
@@ -608,7 +608,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   justify-content: center;
   padding: 0 28px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: linear-gradient(180deg, #282d38, #141824);
   box-shadow: 0 18px 34px -20px rgba(20, 24, 36, 0.85);
   color: #ffffff;
@@ -763,7 +763,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   overflow: hidden;
   padding: 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 0;
   background: #111;
   cursor: pointer;
 }
@@ -790,7 +790,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   place-items: center;
   padding: 22px;
   border: 2px solid rgba(255, 255, 255, 0.82);
-  border-radius: 8px;
+  border-radius: 0;
   background: rgba(159, 181, 214, 0.88);
   color: #ffffff;
   text-align: center;
@@ -812,7 +812,7 @@ dialog.photo-lightbox .photo-lightbox__image {
 .zivo-video__sound span::before {
   position: absolute;
   inset: 6px 22px 6px 0;
-  border-radius: 5px;
+  border-radius: 0;
   background: #ffffff;
   content: "";
 }
@@ -823,7 +823,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   left: -7px;
   width: 96px;
   height: 5px;
-  border-radius: 999px;
+  border-radius: 0;
   background: #ffffff;
   content: "";
   transform: rotate(36deg);
@@ -903,7 +903,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   margin: 0 auto;
   padding: 42px 48px 34px;
   border: 1px solid var(--zivo-line);
-  border-radius: 16px;
+  border-radius: 0;
   background: #ffffff;
   box-shadow: 0 16px 34px -28px rgba(24, 31, 47, 0.55);
 }
@@ -912,7 +912,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   height: 6px;
   margin-bottom: 30px;
   overflow: hidden;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--zivo-line);
 }
 
@@ -920,7 +920,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   display: block;
   width: 4%;
   height: 100%;
-  border-radius: inherit;
+  border-radius: 0;
   background: linear-gradient(90deg, #63719f, #9cadcc);
   transition: width 500ms ease;
 }
@@ -1008,7 +1008,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   min-height: 54px;
   padding: 13px 16px;
   border: 1px solid var(--zivo-line);
-  border-radius: 12px;
+  border-radius: 0;
   background: #ffffff;
   color: rgba(20, 24, 36, 0.92);
   cursor: pointer;
@@ -1048,7 +1048,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   flex: 0 0 20px;
   place-items: center;
   border: 1px solid rgba(83, 96, 115, 0.36);
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .zivo-form__choice.is-selected .zivo-form__choice-marker {
@@ -1059,7 +1059,7 @@ dialog.photo-lightbox .photo-lightbox__image {
 .zivo-form__choice.is-selected .zivo-form__choice-marker::after {
   width: 8px;
   height: 8px;
-  border-radius: inherit;
+  border-radius: 0;
   background: #ffffff;
   content: "";
 }
@@ -1078,7 +1078,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   min-height: 48px;
   padding: 0 24px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: linear-gradient(180deg, #282d38, #141824);
   box-shadow: 0 16px 30px -18px rgba(20, 24, 36, 0.85);
   color: #ffffff;
@@ -1119,7 +1119,7 @@ dialog.photo-lightbox .photo-lightbox__image {
 }
 
 .zivo-form__kbd kbd {
-  border-radius: 5px;
+  border-radius: 0;
   background: #eef0f4;
   padding: 3px 6px;
   font-family: inherit;
@@ -1147,7 +1147,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   min-height: 36px;
   padding: 0 12px;
   border: 1px solid var(--zivo-line);
-  border-radius: 8px;
+  border-radius: 0;
   background: #ffffff;
   color: rgba(83, 96, 115, 0.82);
   cursor: pointer;
@@ -1242,7 +1242,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   padding: 16px;
   break-inside: avoid;
   border: 1px solid var(--zivo-line);
-  border-radius: 12px;
+  border-radius: 0;
   background: #ffffff;
   box-shadow: 0 1px 2px rgba(20, 24, 36, 0.04);
 }
@@ -1259,7 +1259,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   height: 36px;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
+  border-radius: 0;
   background: #63719f;
   color: #ffffff;
   font-size: 12px;
@@ -1313,7 +1313,7 @@ dialog.photo-lightbox .photo-lightbox__image {
 .zivo-card-grid article {
   padding: 22px;
   border: 1px solid var(--zivo-line);
-  border-radius: 12px;
+  border-radius: 0;
   background: #ffffff;
 }
 
@@ -1324,7 +1324,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
-  border-radius: 10px;
+  border-radius: 0;
   background: #eef2f8;
   color: var(--zivo-blue);
   font-size: 13px;
@@ -1382,7 +1382,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   padding: clamp(28px, 5vw, 58px);
   overflow: hidden;
   border: 1px solid var(--zivo-line);
-  border-radius: 14px;
+  border-radius: 0;
   background:
     radial-gradient(circle at 74% 44%, rgba(99, 113, 159, 0.18), transparent 0 12%, transparent 14%),
     radial-gradient(circle at 78% 48%, rgba(99, 113, 159, 0.14), transparent 0 3%, transparent 5%),
@@ -1471,7 +1471,7 @@ dialog.photo-lightbox .photo-lightbox__image {
 .zivo-promise__media {
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 0;
   background: #111;
 }
 
@@ -1508,7 +1508,7 @@ dialog.photo-lightbox .photo-lightbox__image {
   min-height: 210px;
   margin-top: 20px;
   padding: 28px;
-  border-radius: 14px;
+  border-radius: 0;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(30, 37, 55, 0.72)),
     url("assets/photos/outdoor-wedding.jpg") center/cover,
@@ -1547,7 +1547,7 @@ dialog.photo-lightbox .photo-lightbox__image {
 
 .zivo-team-grid img {
   aspect-ratio: 4 / 5;
-  border-radius: 12px;
+  border-radius: 0;
   background: #eef2f8;
   filter: saturate(0.9);
 }
@@ -1594,7 +1594,7 @@ dialog.photo-lightbox .photo-lightbox__image {
 
 .zivo-guide__tiles img {
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: 0;
   background: #e9edf6;
 }
 
