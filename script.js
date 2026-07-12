@@ -1,6 +1,3 @@
-const menuToggle = document.querySelector("[data-menu-toggle]");
-const mobileMenu = document.querySelector("[data-mobile-menu]");
-const menuLinks = document.querySelectorAll("[data-mobile-menu] a, [data-mobile-menu] button");
 const contactForms = document.querySelectorAll("[data-contact-form]");
 const stepForms = document.querySelectorAll("[data-step-form]");
 const bookingDialog = document.querySelector("[data-booking-dialog]");
@@ -132,23 +129,6 @@ const collectTrackingFields = () => {
     .map(([key, value]) => `${key}: ${value}`);
 };
 
-const setMenuState = (isOpen) => {
-  if (!menuToggle || !mobileMenu) return;
-
-  mobileMenu.hidden = !isOpen;
-  document.body.classList.toggle("menu-is-open", isOpen);
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-};
-
-menuToggle?.addEventListener("click", () => {
-  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-  setMenuState(!isOpen);
-});
-
-menuLinks.forEach((link) => {
-  link.addEventListener("click", () => setMenuState(false));
-});
-
 const closeBookingDialog = () => {
   if (!bookingDialog) return;
 
@@ -162,8 +142,6 @@ const closeBookingDialog = () => {
 
 const openBookingDialog = () => {
   if (!bookingDialog) return;
-
-  setMenuState(false);
 
   if (typeof bookingDialog.showModal === "function") {
     bookingDialog.showModal();
@@ -200,12 +178,6 @@ if (window.location.hash === "#booking") {
 window.addEventListener("hashchange", () => {
   if (window.location.hash === "#booking") {
     openBookingDialog();
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    setMenuState(false);
   }
 });
 

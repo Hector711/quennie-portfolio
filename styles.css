@@ -25,10 +25,6 @@ body {
   line-height: 1.35;
 }
 
-body.menu-is-open {
-  overflow: hidden;
-}
-
 body.dialog-is-open {
   overflow: hidden;
 }
@@ -59,7 +55,6 @@ button {
 }
 
 .nav-link-button,
-.mobile-menu button,
 .social-links button {
   padding: 0;
   border: 0;
@@ -100,31 +95,6 @@ button {
 
 .nav-group--right {
   justify-content: end;
-}
-
-.menu-toggle {
-  display: none;
-}
-
-.mobile-menu {
-  position: fixed;
-  inset: 0;
-  z-index: 15;
-  display: grid;
-  place-items: center;
-  background: rgba(251, 250, 247, 0.98);
-}
-
-.mobile-menu[hidden] {
-  display: none;
-}
-
-.mobile-menu nav {
-  display: grid;
-  gap: 24px;
-  text-align: center;
-  font-family: var(--font-display);
-  font-size: 36px;
 }
 
 .home-main {
@@ -439,30 +409,6 @@ button {
     display: none;
   }
 
-  .menu-toggle {
-    grid-column: 3;
-    justify-self: end;
-    display: grid;
-    gap: 8px;
-    width: 55px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .menu-toggle span {
-    display: block;
-    width: 55px;
-    height: 1px;
-    background: var(--ink);
-  }
-
-  .mobile-menu button {
-    font-family: inherit;
-    font-size: inherit;
-  }
-
   .home-offer {
     min-height: auto;
     padding: 118px 0 54px;
@@ -719,32 +665,6 @@ button {
 .zivo-button--light {
   background: #ffffff;
   color: var(--zivo-ink);
-}
-
-.zivo-menu-button {
-  display: none;
-}
-
-.zivo-mobile-menu {
-  position: fixed;
-  inset: 70px 0 0;
-  z-index: 45;
-  background: rgba(255, 255, 255, 0.98);
-}
-
-.zivo-mobile-menu[hidden] {
-  display: none;
-}
-
-.zivo-mobile-menu nav {
-  display: grid;
-  gap: 20px;
-  width: min(360px, calc(100% - 40px));
-  margin: 48px auto 0;
-  color: var(--zivo-ink);
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: 0;
 }
 
 .zivo-main {
@@ -1745,25 +1665,6 @@ button {
   .zivo-nav__links,
   .zivo-nav > .zivo-button {
     display: none;
-  }
-
-  .zivo-menu-button {
-    display: grid;
-    gap: 4px;
-    width: 42px;
-    height: 42px;
-    place-content: center;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .zivo-menu-button span {
-    width: 18px;
-    height: 2px;
-    border-radius: 999px;
-    background: var(--zivo-ink);
   }
 
   .zivo-review-grid {
