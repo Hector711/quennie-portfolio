@@ -1,8 +1,11 @@
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mobileMenu = document.querySelector("[data-mobile-menu]");
-const menuLinks = document.querySelectorAll("[data-mobile-menu] a");
+const menuLinks = document.querySelectorAll("[data-mobile-menu] a, [data-mobile-menu] button");
 const contactForms = document.querySelectorAll("[data-contact-form]");
 const stepForms = document.querySelectorAll("[data-step-form]");
+const bookingDialog = document.querySelector("[data-booking-dialog]");
+const bookingOpenButtons = document.querySelectorAll("[data-booking-open]");
+const bookingCloseButton = document.querySelector("[data-booking-close]");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const TRACKING_FIELDS = [
@@ -144,6 +147,60 @@ menuToggle?.addEventListener("click", () => {
 
 menuLinks.forEach((link) => {
   link.addEventListener("click", () => setMenuState(false));
+});
+
+const closeBookingDialog = () => {
+  if (!bookingDialog) return;
+
+  if (typeof bookingDialog.close === "function" && bookingDialog.open) {
+    bookingDialog.close();
+  } else {
+    bookingDialog.removeAttribute("open");
+    document.body.classList.remove("dialog-is-open");
+  }
+};
+
+const openBookingDialog = () => {
+  if (!bookingDialog) return;
+
+  setMenuState(false);
+
+  if (typeof bookingDialog.showModal === "function") {
+    bookingDialog.showModal();
+  } else {
+    bookingDialog.setAttribute("open", "");
+  }
+
+  document.body.classList.add("dialog-is-open");
+  window.setTimeout(() => {
+    bookingDialog.querySelector("input, textarea, button")?.focus({ preventScroll: true });
+  }, 80);
+};
+
+bookingOpenButtons.forEach((button) => {
+  button.addEventListener("click", openBookingDialog);
+});
+
+bookingCloseButton?.addEventListener("click", closeBookingDialog);
+
+bookingDialog?.addEventListener("click", (event) => {
+  if (event.target === bookingDialog) {
+    closeBookingDialog();
+  }
+});
+
+bookingDialog?.addEventListener("close", () => {
+  document.body.classList.remove("dialog-is-open");
+});
+
+if (window.location.hash === "#booking") {
+  window.setTimeout(openBookingDialog, 120);
+}
+
+window.addEventListener("hashchange", () => {
+  if (window.location.hash === "#booking") {
+    openBookingDialog();
+  }
 });
 
 document.addEventListener("keydown", (event) => {

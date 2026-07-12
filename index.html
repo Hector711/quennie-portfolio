@@ -14,21 +14,21 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260712-landing" />
+    <link rel="stylesheet" href="styles.css?v=20260712-home" />
   </head>
-  <body>
+  <body class="home-page">
     <header class="site-header">
       <nav class="nav-group nav-group--left" aria-label="Navegación principal">
         <a href="#selected-work">Selected work</a>
         <a href="#contact">Contact</a>
       </nav>
 
-      <a class="brand" href="#selected-work" aria-label="Quennie Studio home">
+      <a class="brand" href="#top" aria-label="Quennie Studio home">
         Quennie Studio
       </a>
 
       <nav class="nav-group nav-group--right" aria-label="Enlaces externos">
-        <a href="landing.html">Booking</a>
+        <button class="nav-link-button" type="button" data-booking-open>Booking</button>
         <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
       </nav>
 
@@ -43,73 +43,127 @@
       <nav aria-label="Menú móvil">
         <a href="#selected-work">Selected work</a>
         <a href="#contact">Contact</a>
-        <a href="landing.html">Booking</a>
+        <button type="button" data-booking-open>Booking</button>
         <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
       </nav>
     </aside>
 
-    <main id="selected-work" class="work-grid" aria-label="Selected work">
-      <article class="work-item work-item--hero-left">
-        <img
-          src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=86"
-          alt="Lugar de ceremonia con flores y luz cálida"
-        />
-      </article>
-      <article class="work-item work-item--hero-right">
-        <img
-          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=86"
-          alt="Atardecer dorado junto al mar"
-        />
-      </article>
-      <article class="work-item work-item--row-two-left">
-        <img
-          src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=86"
-          alt="Paisaje de montaña con tonos dorados"
-        />
-      </article>
-      <article class="work-item work-item--row-two-mid">
-        <img
-          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=86"
-          alt="Mesa con café y luz de mañana"
-        />
-      </article>
-      <article class="work-item work-item--row-two-right">
-        <img
-          src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=86&sat=-20"
-          alt="Vista cálida desde un balcón"
-        />
-      </article>
-      <article class="work-item work-item--spaced">
-        <img
-          src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=900&q=86"
-          alt="Interior cálido con persona descansando junto a una ventana"
-        />
-      </article>
-      <article class="work-item work-item--lower-left">
-        <img
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=86"
-          alt="Pareja en una celebración íntima"
-        />
-      </article>
-      <article class="work-item work-item--lower-right">
-        <img
-          src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=900&q=86"
-          alt="Celebración de boda al aire libre"
-        />
-      </article>
-      <article class="work-item work-item--final-left">
-        <img
-          src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=900&q=86"
-          alt="Habitación con luz cálida"
-        />
-      </article>
-      <article class="work-item work-item--final-right">
-        <img
-          src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=900&q=86"
-          alt="Fotógrafa en un interior luminoso"
-        />
-      </article>
+    <main class="home-main">
+      <section class="home-offer" id="top" aria-labelledby="home-title">
+        <div class="home-offer__inner">
+          <p class="home-offer__kicker">Wedding & editorial photography</p>
+          <h1 id="home-title">Quennie</h1>
+          <p class="home-offer__copy">
+            Fotografía documental y editorial para parejas que quieren vivir la boda con calma
+            y recibir una galería natural, elegante y atemporal.
+          </p>
+          <button class="home-offer__cta" type="button" data-booking-open>Reserva tu fecha</button>
+          <div class="home-video" role="img" aria-label="Vídeo de presentación de Quennie">
+            <img
+              src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=88"
+              alt="Pareja de boda durante una celebración íntima"
+            />
+            <span class="home-video__shade" aria-hidden="true"></span>
+            <span class="home-video__panel">
+              <strong>Vídeo de presentación</strong>
+              <span aria-hidden="true"></span>
+              <em>Trabajo, proceso y galerías reales</em>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section id="selected-work" class="work-grid" aria-label="Selected work">
+        <article class="work-item work-item--hero-left">
+          <img
+            src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=86"
+            alt="Lugar de ceremonia con flores y luz cálida"
+          />
+        </article>
+        <article class="work-item work-item--hero-right">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=86"
+            alt="Atardecer dorado junto al mar"
+          />
+        </article>
+        <article class="work-item work-item--row-two-left">
+          <img
+            src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=86"
+            alt="Paisaje de montaña con tonos dorados"
+          />
+        </article>
+        <article class="work-item work-item--row-two-mid">
+          <img
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=86"
+            alt="Mesa con café y luz de mañana"
+          />
+        </article>
+        <article class="work-item work-item--row-two-right">
+          <img
+            src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=86&sat=-20"
+            alt="Vista cálida desde un balcón"
+          />
+        </article>
+        <article class="work-item work-item--spaced">
+          <img
+            src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=900&q=86"
+            alt="Interior cálido con persona descansando junto a una ventana"
+          />
+        </article>
+        <article class="work-item work-item--lower-left">
+          <img
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=86"
+            alt="Pareja en una celebración íntima"
+          />
+        </article>
+        <article class="work-item work-item--lower-right">
+          <img
+            src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=900&q=86"
+            alt="Celebración de boda al aire libre"
+          />
+        </article>
+        <article class="work-item work-item--final-left">
+          <img
+            src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=900&q=86"
+            alt="Habitación con luz cálida"
+          />
+        </article>
+        <article class="work-item work-item--final-right">
+          <img
+            src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=900&q=86"
+            alt="Fotógrafa en un interior luminoso"
+          />
+        </article>
+      </section>
     </main>
+
+    <dialog class="booking-dialog" data-booking-dialog aria-label="Formulario de reserva">
+      <button class="booking-dialog__close" type="button" data-booking-close aria-label="Cerrar formulario">
+        Cerrar
+      </button>
+      <form
+        class="zivo-form"
+        data-contact-form
+        data-step-form
+        data-recipient="hello@quennie.studio"
+        data-subject-prefix="Solicitud de boda Quennie"
+      >
+        <div class="zivo-form__progress" aria-hidden="true">
+          <span data-form-progress></span>
+        </div>
+        <div class="zivo-form__screen" data-form-screen></div>
+        <footer class="zivo-form__footer">
+          <button class="zivo-form__back" type="button" data-form-back hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 12H5M11 18l-6-6 6-6" />
+            </svg>
+            Atrás
+          </button>
+          <span class="zivo-form__counter" data-form-counter>01 / 09</span>
+        </footer>
+        <p class="zivo-form__status" role="status" data-form-status></p>
+      </form>
+    </dialog>
 
     <footer class="site-footer" id="contact">
       <div>
@@ -117,7 +171,7 @@
         <a href="mailto:hello@quennie.studio">hello@quennie.studio</a>
         <div class="social-links">
           <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">ig</a>
-          <a href="landing.html" aria-label="Booking">bk</a>
+          <button type="button" data-booking-open aria-label="Booking">bk</button>
         </div>
       </div>
       <div>
@@ -126,6 +180,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260712-landing"></script>
+    <script src="script.js?v=20260712-home"></script>
   </body>
 </html>
