@@ -1605,19 +1605,6 @@ button {
     padding: 34px 18px 24px;
   }
 
-  .zivo-form__screen {
-    min-height: 356px;
-  }
-
-  .zivo-form__question {
-    font-size: 24px;
-  }
-
-  .zivo-form__field input,
-  .zivo-form__field textarea {
-    font-size: 22px;
-  }
-
   .zivo-form__progress {
     margin-bottom: 24px;
   }
