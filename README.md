@@ -5,6 +5,7 @@ Landing page estática para el portfolio fotográfico de Quennie.
 ## Archivos
 
 - `index.html`: estructura principal de la landing.
+- `mapa/index.html`: mapa interno no indexable para visualizar páginas y secciones del dominio.
 - `styles.css`: dirección visual responsive y sistema de componentes.
 - `script.js`: menú móvil, filtros de portfolio y formulario por email.
 

@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="Mapa interno de Quennie Studio para visualizar las páginas y secciones principales del dominio."
+    />
+    <title>Quennie Studio | Mapa interno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbfaf7;
+        --surface: #ffffff;
+        --ink: #171411;
+        --muted: #665f57;
+        --line: #e6ded1;
+        --accent: #6f778f;
+        --sage: #788771;
+        --rose: #ad8274;
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --font-body: "Inter", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(251, 250, 247, 0.92)),
+          var(--paper);
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .map-shell {
+        width: min(920px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 48px 0 64px;
+      }
+
+      .map-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-bottom: 36px;
+      }
+
+      .map-brand {
+        font-family: var(--font-display);
+        font-size: clamp(29px, 5vw, 42px);
+        font-weight: 400;
+        line-height: 0.95;
+      }
+
+      .map-back {
+        display: inline-flex;
+        min-height: 38px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .map-back:hover,
+      .map-back:focus-visible {
+        border-color: var(--ink);
+        color: var(--ink);
+      }
+
+      .map-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: clamp(24px, 7vw, 86px);
+        align-items: end;
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .map-kicker {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 620px;
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(46px, 8vw, 82px);
+        font-weight: 400;
+        line-height: 0.92;
+      }
+
+      .map-intro {
+        max-width: 610px;
+        margin: 18px 0 0;
+        color: var(--muted);
+      }
+
+      .map-counter {
+        display: grid;
+        width: 132px;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: var(--surface);
+        text-align: center;
+      }
+
+      .map-counter strong {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 45px;
+        font-weight: 400;
+        line-height: 0.9;
+      }
+
+      .map-counter span {
+        display: block;
+        max-width: 86px;
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .map-section {
+        margin-top: 40px;
+      }
+
+      .map-section__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 12px;
+      }
+
+      h2 {
+        margin: 0;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .map-tag {
+        color: var(--accent);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+      }
+
+      .map-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .map-card {
+        display: grid;
+        grid-template-columns: minmax(138px, 0.34fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+      }
+
+      .map-card:hover,
+      .map-card:focus-visible {
+        border-color: rgba(23, 20, 17, 0.5);
+        background: #ffffff;
+        transform: translateY(-1px);
+      }
+
+      .map-path {
+        color: var(--ink);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+      }
+
+      .map-card strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .map-card span:last-child {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .map-card--primary {
+        border-color: rgba(111, 119, 143, 0.36);
+        background: #ffffff;
+      }
+
+      .map-card--sage {
+        border-color: rgba(120, 135, 113, 0.34);
+      }
+
+      .map-card--rose {
+        border-color: rgba(173, 130, 116, 0.34);
+      }
+
+      .map-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        margin-top: 52px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      :focus-visible {
+        outline: 1px solid currentColor;
+        outline-offset: 4px;
+      }
+
+      @media (max-width: 720px) {
+        .map-shell {
+          width: calc(100% - 32px);
+          padding-top: 30px;
+        }
+
+        .map-topbar,
+        .map-hero,
+        .map-footer {
+          grid-template-columns: 1fr;
+        }
+
+        .map-topbar,
+        .map-footer {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .map-hero {
+          gap: 26px;
+        }
+
+        .map-counter {
+          width: 112px;
+        }
+
+        .map-card {
+          grid-template-columns: 1fr;
+          gap: 8px;
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="map-shell">
+      <header class="map-topbar">
+        <a class="map-brand" href="/" aria-label="Volver al inicio de Quennie Studio">
+          Quennie Studio
+        </a>
+        <a class="map-back" href="/">Volver al portfolio</a>
+      </header>
+
+      <section class="map-hero" aria-labelledby="map-title">
+        <div>
+          <p class="map-kicker">Mapa interno del dominio</p>
+          <h1 id="map-title">Todas las páginas visibles de la web</h1>
+          <p class="map-intro">
+            Inventario rápido para revisar la estructura actual de Quennie Studio. Pulsa
+            cualquier ruta para abrirla en su flujo real.
+          </p>
+        </div>
+        <div class="map-counter" aria-label="Tres páginas principales">
+          <div>
+            <strong>3</strong>
+            <span>páginas principales</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="map-section" aria-labelledby="pages-title">
+        <div class="map-section__heading">
+          <h2 id="pages-title">Páginas</h2>
+          <span class="map-tag">dominio</span>
+        </div>
+        <ul class="map-list">
+          <li>
+            <a class="map-card map-card--primary" href="/">
+              <span class="map-path">/</span>
+              <span>
+                <strong>Portfolio editorial</strong>
+                Página principal con el grid de trabajos seleccionados y acceso a contacto.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card map-card--sage" href="/landing.html">
+              <span class="map-path">/landing.html</span>
+              <span>
+                <strong>Landing de reserva</strong>
+                Página de conversión para bodas, vídeo, formulario, prueba social y secciones de venta.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card map-card--rose" href="/mapa/">
+              <span class="map-path">/mapa/</span>
+              <span>
+                <strong>Mapa interno</strong>
+                Esta vista no indexable para auditar las páginas y secciones del sitio.
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="map-section" aria-labelledby="portfolio-title">
+        <div class="map-section__heading">
+          <h2 id="portfolio-title">Portfolio</h2>
+          <span class="map-tag">/</span>
+        </div>
+        <ul class="map-list">
+          <li>
+            <a class="map-card" href="/#selected-work">
+              <span class="map-path">/#selected-work</span>
+              <span>
+                <strong>Selected work</strong>
+                Galería principal con las imágenes destacadas del portfolio.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="/#contact">
+              <span class="map-path">/#contact</span>
+              <span>
+                <strong>Contact</strong>
+                Footer con correo, enlaces sociales y copyright.
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="map-section" aria-labelledby="booking-title">
+        <div class="map-section__heading">
+          <h2 id="booking-title">Reserva</h2>
+          <span class="map-tag">/landing.html</span>
+        </div>
+        <ul class="map-list">
+          <li>
+            <a class="map-card" href="/landing.html#top">
+              <span class="map-path">/landing.html#top</span>
+              <span>
+                <strong>Entrada de la landing</strong>
+                Hero de la propuesta de boda y acceso directo a la reserva.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="/landing.html#consulta">
+              <span class="map-path">/landing.html#consulta</span>
+              <span>
+                <strong>Consulta inicial</strong>
+                Formulario que prepara la solicitud por email.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="/landing.html#prueba">
+              <span class="map-path">/landing.html#prueba</span>
+              <span>
+                <strong>Prueba social</strong>
+                Reseñas y testimonios de parejas.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="/landing.html#como-trabajamos">
+              <span class="map-path">/landing.html#como-trabajamos</span>
+              <span>
+                <strong>Cómo trabajamos</strong>
+                Proceso de claridad visual, cobertura y entrega.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="/landing.html#bodas">
+              <span class="map-path">/landing.html#bodas</span>
+              <span>
+                <strong>Encaje de bodas</strong>
+                Tipos de celebraciones y perfil de pareja.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="/landing.html#promesa">
+              <span class="map-path">/landing.html#promesa</span>
+              <span>
+                <strong>Nuestra promesa</strong>
+                Compromiso de fotografía honesta, dirección amable y entrega cuidada.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="/landing.html#porque-quennie">
+              <span class="map-path">/landing.html#porque-quennie</span>
+              <span>
+                <strong>Por qué Quennie</strong>
+                Diferenciadores de estética, personalización y agenda.
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="map-section" aria-labelledby="external-title">
+        <div class="map-section__heading">
+          <h2 id="external-title">Salidas</h2>
+          <span class="map-tag">externo</span>
+        </div>
+        <ul class="map-list">
+          <li>
+            <a class="map-card" href="mailto:hello@quennie.studio">
+              <span class="map-path">mailto:hello@quennie.studio</span>
+              <span>
+                <strong>Email</strong>
+                Contacto directo para consultas y solicitudes.
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="map-card" href="https://www.instagram.com/" target="_blank" rel="noreferrer">
+              <span class="map-path">instagram.com</span>
+              <span>
+                <strong>Instagram</strong>
+                Enlace social configurado en la navegación del portfolio.
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="map-footer">
+        <span>Quennie Studio 2026</span>
+        <span>Mapa interno inspirado en las estructuras de Casa Caoba y Zivo.</span>
+      </footer>
+    </main>
+  </body>
+</html>
