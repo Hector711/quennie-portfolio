@@ -239,7 +239,6 @@ button {
   grid-auto-rows: 1px;
   column-gap: 24px;
   width: min(1152px, calc(100% - 72px));
-  min-height: 6178px;
   margin: 0 auto;
   padding-top: 182px;
 }
@@ -472,7 +471,6 @@ button {
     grid-auto-rows: 1px;
     column-gap: 24px;
     width: calc(100% - 40px);
-    min-height: 2120px;
     padding-top: 28px;
   }
 
