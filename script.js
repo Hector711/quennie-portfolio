@@ -1,27 +1,44 @@
 const header = document.querySelector("[data-header]");
-const navToggle = document.querySelector(".nav-toggle");
-const nav = document.querySelector(".site-nav");
+const menuToggle = document.querySelector("[data-menu-toggle]");
+const menuPanel = document.querySelector("[data-menu-panel]");
+const menuClose = document.querySelector("[data-menu-close]");
+const menuLinks = document.querySelectorAll(".menu-panel a");
 const filterButtons = document.querySelectorAll("[data-filter]");
 const workCards = document.querySelectorAll("[data-category]");
 const contactForm = document.querySelector("[data-contact-form]");
 const formStatus = document.querySelector("[data-form-status]");
 
 const setHeaderState = () => {
+  if (!header) return;
   header.classList.toggle("is-scrolled", window.scrollY > 12);
+};
+
+const setMenuState = (isOpen) => {
+  if (!menuToggle || !menuPanel || !header) return;
+
+  menuPanel.hidden = !isOpen;
+  document.body.classList.toggle("menu-is-open", isOpen);
+  header.classList.toggle("is-menu-open", isOpen);
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
 };
 
 setHeaderState();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 
-navToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("is-open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
+menuToggle?.addEventListener("click", () => {
+  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+  setMenuState(!isOpen);
 });
 
-nav.addEventListener("click", (event) => {
-  if (event.target.matches("a")) {
-    nav.classList.remove("is-open");
-    navToggle.setAttribute("aria-expanded", "false");
+menuClose?.addEventListener("click", () => setMenuState(false));
+
+menuLinks.forEach((link) => {
+  link.addEventListener("click", () => setMenuState(false));
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setMenuState(false);
   }
 });
 
@@ -39,7 +56,7 @@ filterButtons.forEach((button) => {
   });
 });
 
-contactForm.addEventListener("submit", (event) => {
+contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const data = new FormData(contactForm);
@@ -53,6 +70,9 @@ contactForm.addEventListener("submit", (event) => {
     `Nombre: ${name}\nEmail: ${email}\nTipo de sesión: ${session}\n\n${message}`
   );
 
-  formStatus.textContent = "Consulta preparada en tu cliente de email.";
+  if (formStatus) {
+    formStatus.textContent = "Consulta preparada en tu cliente de email.";
+  }
+
   window.location.href = `mailto:hello@quennie.studio?subject=${subject}&body=${body}`;
 });
