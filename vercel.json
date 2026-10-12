@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
+    {
+      "src": "^/$",
+      "dest": "/api/version"
+    },
+    {
+      "src": "^/v2(?:/.*)?$",
+      "headers": {
+        "X-Robots-Tag": "noindex, follow"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    }
+  ]
+}

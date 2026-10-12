@@ -183,12 +183,12 @@ const focusTextControl = (control) => {
 };
 
 const FALLBACK_PHOTOS = [
-  "assets/photos/wedding-couple.jpg",
-  "assets/photos/ceremony-flowers.jpg",
-  "assets/photos/outdoor-wedding.jpg",
-  "assets/photos/wedding-detail.jpg",
-  "assets/photos/team-photographer.jpg",
-  "assets/photos/couple-walk.jpg",
+  "/assets/photos/wedding-couple.jpg",
+  "/assets/photos/ceremony-flowers.jpg",
+  "/assets/photos/outdoor-wedding.jpg",
+  "/assets/photos/wedding-detail.jpg",
+  "/assets/photos/team-photographer.jpg",
+  "/assets/photos/couple-walk.jpg",
 ];
 const FINAL_FALLBACK_PHOTO = `data:image/svg+xml,${encodeURIComponent(`
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
@@ -786,3 +786,9 @@ contactForms.forEach((form) => {
     window.location.href = `mailto:hello@quennie.studio?subject=${subject}&body=${body}${replyTo}`;
   });
 });
+
+(() => {
+  const version = window.location.pathname.match(/^\/(v[12])(?:\/|$)/)?.[1];
+  if (!version) return;
+  document.cookie = `quennie_version=${version}; Max-Age=2592000; Path=/; SameSite=Lax`;
+})();
