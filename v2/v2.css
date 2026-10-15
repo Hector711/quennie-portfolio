@@ -125,7 +125,7 @@ section { scroll-margin-top: calc(var(--header-h) + 16px); }
 .v2-skip:focus { transform: translateY(0); }
 
 .v2-header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 30;
   height: var(--header-h);
